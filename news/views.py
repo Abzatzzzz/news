@@ -10,4 +10,4 @@ def index(request):
 def get_category(request, category_id):
     news = News.objects.filter(category_id=category_id)
     categories = Category.objects.all()
-    return render(request, 'news/index.html', {'news': news, 'categories': categories})
+    return render(request, 'news/category.html', {'news': news, 'categories': categories})
