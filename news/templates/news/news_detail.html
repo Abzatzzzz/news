@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
+{% load news_tags %}
 {% block sidebar %}
+    {% show_categories %} 
 {% endblock %}
 
 {% block content %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from . models import News, Category
 
 
@@ -13,4 +13,4 @@ def get_category(request, category_id):
     return render(request, 'news/category.html', {'news': news, 'categories': categories})
 
 def get_news(request, news_id):
-    return render(request, 'news/news_detail.html', {'news': News.objects.get(pk=news_id)})
+    return render(request, 'news/news_detail.html', {'news': get_object_or_404(News, pk=news_id)})
