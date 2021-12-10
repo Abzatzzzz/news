@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load news_tags %}
+
+{% block sidebar %}
+    {% show_categories %} 
+{% endblock %}
+
+{% block title %}
+  добавление новости
+{% endblock %}
+
+{% block content %}
+    <h1> Добавить новость </h1>
+    <form action='{% url 'news:add_news' %}' method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type='submit' class='btn btn-primary btn-block'>Добавить новость</button>
+    </form>
+{% endblock %}
