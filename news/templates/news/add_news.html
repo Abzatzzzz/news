@@ -14,7 +14,40 @@
     <h1> Добавить новость </h1>
     <form action='{% url 'news:add_news' %}' method='post'>
         {% csrf_token %}
+
+        {% comment %}
         {{ form.as_p }}
+        {% endcomment %}
+
+        {{ form.none_field_errors }}
+        <div class="mb-3">
+            <label for="{{ form.title.id_for_label }}">Название</label>
+                {{ form.title  }}
+            <div class="invalid-feedback">
+                {{ form.title.errors }}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.content.id_for_label }}">Контент</label>
+                {{ form.content  }}
+            <div class="invalid-feedback">
+                {{ form.content.errors }}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.category.id_for_label }}">Категория</label>
+                {{ form.category  }}
+            <div class="invalid-feedback">
+                {{ form.category.errors }}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.is_published.id_for_label }}">Опубликовано</label>
+                {{ form.is_published  }}
+            <div class="invalid-feedback">
+                {{ form.is_published.errors }}
+            </div>
+        </div>
         <button type='submit' class='btn btn-primary btn-block'>Добавить новость</button>
     </form>
 {% endblock %}
