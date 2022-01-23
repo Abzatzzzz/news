@@ -8,6 +8,6 @@ app_name = "news"
 urlpatterns = [
     path('', views.IndexListView.as_view(), name="home"),
     path('category/<int:category_id>', views.NewsByCategoryListView.as_view(extra_context={'title': 'category_unknown'}), name="category"),
-    path('<int:news_id>', views.get_news, name='news_detail'),
+    path('<int:pk>', views.GetNewsDetailView.as_view(), name='news_detail'),
     path('add_news/', views.add_news, name='add_news'),
 ]

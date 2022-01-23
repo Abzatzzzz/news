@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import News, Category
 from .forms import AddNewsCreateForm
 
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 
 class IndexListView(ListView):
     model = News
@@ -30,12 +30,18 @@ class NewsByCategoryListView(ListView):
         context['title'] = Category.objects.get(pk=self.kwargs['category_id'])
         return context
 
-    def get_queryset(self):
+    def get_queryset(self):  # it is supposed to be filtering data in db
         return News.objects.filter(category=self.kwargs['category_id'], is_published=True)
 
 
-def get_news(request, news_id):
-    return render(request, 'news/news_detail.html', {'news': get_object_or_404(News, pk=news_id)})
+class GetNewsDetailView(DetailView):
+    """
+     джанго не требует обьявления template_name если название шаблона имеет формат 'view'+'название апликейшна' в данном случа view_news.html 
+    """
+    model = News
+    context_object_name = 'news'
+    #pk_url_kwarg = 'news_id' # возможный способ передачи pk
+
 
 def add_news(request):
     if request.method == 'POST':
