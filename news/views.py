@@ -42,15 +42,7 @@ class GetNewsDetailView(DetailView):
     context_object_name = 'news'
     #pk_url_kwarg = 'news_id' # возможный способ передачи pk
 
-
-def add_news(request):
-    if request.method == 'POST':
-        form = AddNewsCreateForm(request.POST)
-        if form.is_valid():
-            form.save() 
-        return redirect('news:home')
-
-
-    form = AddNewsCreateForm()
-    return render(request, 'news/add_news.html', {'form': form})
+class CreateNewsView(CreateView):
+    form_class = AddNewsCreateForm
+    template_name = 'news/add_news.html'
 
